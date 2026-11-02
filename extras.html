@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creative Lab | PixelPilot Hub</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header>
+    <a class="logo" href="index.html">PixelPilot<span>Hub</span></a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="minecraft.html">Minecraft</a>
+      <a href="studio.html">Build Studio</a>
+      <a href="tools.html">AI Tools</a>
+      <a class="active" href="extras.html">Creative Lab</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <p class="eyebrow">PIXELPILOT CREATIVE LAB</p>
+    <h1>Your Minecraft <span>control room.</span></h1>
+    <p class="muted">Tools, saved ideas and building utilities.</p>
+
+    <section class="stats-grid">
+      <div class="stat-card">
+        <strong id="favoriteCount">0</strong>
+        <span>Saved favorites</span>
+      </div>
+      <div class="stat-card">
+        <strong id="seedCount">0</strong>
+        <span>Saved seeds</span>
+      </div>
+      <div class="stat-card">
+        <strong id="ideaCount">6</strong>
+        <span>Build ideas</span>
+      </div>
+    </section>
+
+    <section class="tool-panel">
+      <h2>Block & Material Calculator</h2>
+      <p class="muted">Estimate blocks for a floor, solid structure or walls.</p>
+      <div class="calculator-grid">
+        <label>Length
+          <input id="calcLength" type="number" min="1" value="10">
+        </label>
+        <label>Width
+          <input id="calcWidth" type="number" min="1" value="10">
+        </label>
+        <label>Height
+          <input id="calcHeight" type="number" min="1" value="5">
+        </label>
+        <label>Build type
+          <select id="calcType">
+            <option value="solid">Solid structure</option>
+            <option value="walls">Walls only</option>
+            <option value="floor">Floor only</option>
+          </select>
+        </label>
+      </div>
+      <button class="btn primary" id="calculateBlocks">Calculate Blocks</button>
+      <div class="calculator-result" id="calcResult">Your result will appear here.</div>
+    </section>
+
+    <section class="tool-panel">
+      <h2>Minecraft Command Generator</h2>
+      <p class="muted">Creates basic Java Edition commands.</p>
+      <label>Command type
+        <select id="commandType">
+          <option value="time">Set time</option>
+          <option value="weather">Set weather</option>
+          <option value="gamemode">Set game mode</option>
+          <option value="difficulty">Set difficulty</option>
+          <option value="give">Give an item</option>
+        </select>
+      </label>
+      <div id="commandOptions"></div>
+      <button class="btn primary" id="generateCommand">Generate Command</button>
+      <div class="command-output" id="commandOutput">Your command will appear here.</div>
+      <button class="btn secondary" id="copyCommand">Copy Command</button>
+    </section>
+
+    <section class="tool-panel">
+      <h2>Build Gallery</h2>
+      <p class="muted">Pick an idea and save it to your favorites.</p>
+      <div class="feature-grid" id="buildGallery">
+        <article class="feature-card">
+          <div class="feature-icon">🏰</div>
+          <h3>Medieval Castle</h3>
+          <p>Stone towers, walls and a grand entrance.</p>
+          <button class="btn secondary gallery-save" data-build="Medieval Castle">☆ Save</button>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon">🏡</div>
+          <h3>Modern Mansion</h3>
+          <p>Glass walls, clean shapes and a pool.</p>
+          <button class="btn secondary gallery-save" data-build="Modern Mansion">☆ Save</button>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon">🧙</div>
+          <h3>Floating Wizard Tower</h3>
+          <p>A magical tower above the clouds.</p>
+          <button class="btn secondary gallery-save" data-build="Floating Wizard Tower">☆ Save</button>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon">🏯</div>
+          <h3>Japanese Pagoda</h3>
+          <p>Layered roofs and a peaceful garden.</p>
+          <button class="btn secondary gallery-save" data-build="Japanese Pagoda">☆ Save</button>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon">🧪</div>
+          <h3>Underground Laboratory</h3>
+          <p>A hidden base with rooms and tunnels.</p>
+          <button class="btn secondary gallery-save" data-build="Underground Laboratory">☆ Save</button>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon">🌳</div>
+          <h3>Treehouse Village</h3>
+          <p>Connected houses high in the trees.</p>
+          <button class="btn secondary gallery-save" data-build="Treehouse Village">☆ Save</button>
+        </article>
+      </div>
+    </section>
+
+    <section class="tool-panel">
+      <h2>My Favorites</h2>
+      <div id="favoritesList" class="favorites-list">No favorites saved yet.</div>
+      <button class="btn secondary" id="clearFavorites">Clear Favorites</button>
+    </section>
+
+    <section class="tool-panel">
+      <h2>Seed Explorer</h2>
+      <p class="muted">Save world seeds and open an external seed map.</p>
+      <div class="calculator-grid">
+        <label>World seed
+          <input id="seedInput" type="text" placeholder="Enter a seed">
+        </label>
+        <label>Minecraft version
+          <select id="seedVersion">
+            <option>Java 1.21</option>
+            <option>Java 1.20</option>
+            <option>Bedrock</option>
+            <option>Other</option>
+          </select>
+        </label>
+      </div>
+      <button class="btn primary" id="saveSeed">Save Seed</button>
+      <div id="seedsList" class="favorites-list">No seeds saved yet.</div>
+      <a class="external-seed-link" href="https://www.chunkbase.com/apps/seed-map" target="_blank" rel="noopener noreferrer">Open Chunkbase Seed Map ↗</a>
+    </section>
+  </main>
+
+  <footer>PixelPilot Hub · Creative Lab</footer>
+</body>
+</html>

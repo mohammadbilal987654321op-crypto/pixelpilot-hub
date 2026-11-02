@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Build Studio | PixelPilot Hub</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header>
+    <a class="logo" href="index.html">PixelPilot<span>Hub</span></a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="minecraft.html">Minecraft</a>
+      <a class="active" href="studio.html">Build Studio</a>
+      <a href="tools.html">AI Tools</a>
+      <a href="extras.html">Creative Lab</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <p class="eyebrow">BUILD STUDIO</p>
+    <h1>Design your next <span>build.</span></h1>
+    <p class="muted">Generate a random Minecraft building idea.</p>
+
+    <section class="tool-panel">
+      <div class="button-row">
+        <button class="btn primary" id="generateBuild">Generate Build</button>
+        <button class="btn secondary" id="randomBuild">Random Build</button>
+      </div>
+
+      <div id="buildResult" class="result-panel">
+        <div class="feature-icon">🏰</div>
+        <h2>Your next build awaits</h2>
+        <p>Click Generate Build to get an idea.</p>
+      </div>
+
+      <button class="btn secondary" id="saveBuildFavorite">☆ Save to Favorites</button>
+    </section>
+  </main>
+
+  <footer>PixelPilot Hub · Build Studio</footer>
+</body>
+</html>

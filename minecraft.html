@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minecraft Explorer | PixelPilot Hub</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header>
+    <a class="logo" href="index.html">PixelPilot<span>Hub</span></a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a class="active" href="minecraft.html">Minecraft</a>
+      <a href="studio.html">Build Studio</a>
+      <a href="tools.html">AI Tools</a>
+      <a href="extras.html">Creative Lab</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <p class="eyebrow">MINECRAFT EXPLORER</p>
+    <h1>Explore the <span>block world.</span></h1>
+    <p class="muted">Select a category to discover Minecraft information.</p>
+
+    <input id="minecraftSearch" class="search-box"
+      type="text" placeholder="Search categories or topics...">
+
+    <section class="feature-grid" id="minecraftCards">
+      <button class="feature-card explorer-card" data-category="biomes">
+        <div class="feature-icon">🌲</div>
+        <h3>Biomes</h3>
+        <p>Discover Minecraft environments.</p>
+      </button>
+      <button class="feature-card explorer-card" data-category="mobs">
+        <div class="feature-icon">🐉</div>
+        <h3>Mobs</h3>
+        <p>Discover creatures and animals.</p>
+      </button>
+      <button class="feature-card explorer-card" data-category="blocks">
+        <div class="feature-icon">🧱</div>
+        <h3>Blocks</h3>
+        <p>Explore building and utility blocks.</p>
+      </button>
+      <button class="feature-card explorer-card" data-category="ores">
+        <div class="feature-icon">💎</div>
+        <h3>Ores</h3>
+        <p>Learn about underground resources.</p>
+      </button>
+      <button class="feature-card explorer-card" data-category="dimensions">
+        <div class="feature-icon">🌌</div>
+        <h3>Dimensions</h3>
+        <p>Explore the Overworld, Nether and End.</p>
+      </button>
+      <button class="feature-card explorer-card" data-category="combat">
+        <div class="feature-icon">⚔️</div>
+        <h3>Combat</h3>
+        <p>Learn about weapons and armor.</p>
+      </button>
+    </section>
+
+    <section class="tool-panel explorer-details" id="explorerDetails" hidden>
+      <button class="btn secondary" id="backToCategories">← Back to categories</button>
+      <div id="explorerContent"></div>
+    </section>
+  </main>
+
+  <footer>PixelPilot Hub · Minecraft Explorer</footer>
+</body>
+</html>

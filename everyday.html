@@ -1,0 +1,355 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Everyday Tools | PixelPilot Hub</title>
+<style>
+*{box-sizing:border-box}
+:root{--bg:#080b16;--panel:rgba(23,31,54,.72);--border:rgba(150,170,255,.16);--text:#edf0ff;--muted:#9ca8c9;--accent:#9a8cff;--blue:#69c8ff}
+body{
+ margin:0;background:radial-gradient(ellipse at 10% 0%,#20204a 0,transparent 40%),
+ radial-gradient(ellipse at 90% 30%,#12334b 0,transparent 35%),var(--bg);
+ color:var(--text);font-family:Inter,Arial,sans-serif;min-height:100vh;padding:25px
+}
+main{max-width:1100px;margin:auto}
+nav{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:55px}
+.logo{font-size:20px;font-weight:800;letter-spacing:-.7px}
+.logo span{color:var(--accent)}
+nav a{color:var(--muted);text-decoration:none;font-size:14px}
+.hero{margin-bottom:35px}
+.tag{color:var(--blue);font-size:12px;letter-spacing:2px;font-weight:bold}
+h1{font-size:clamp(35px,6vw,58px);letter-spacing:-2px;margin:12px 0}
+.hero p,.muted{color:var(--muted);line-height:1.6}
+.tabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px}
+.tab{background:#171d32;color:var(--muted);border:1px solid var(--border);padding:11px 17px;border-radius:12px;cursor:pointer}
+.tab.active{background:#38305e;color:white;border-color:#9585ff}
+.panel{background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:24px;margin-bottom:18px;backdrop-filter:blur(18px);box-shadow:0 15px 45px #0002}
+.tool{display:none}.tool.active{display:block}
+h2{margin-top:0;font-size:23px}
+label{display:block;color:#c6cce5;font-size:13px;margin:15px 0 7px}
+input,textarea,select{
+ width:100%;background:#0c1122;color:white;border:1px solid #343b5c;
+ border-radius:10px;padding:12px;font:inherit;outline:none
+}
+textarea{min-height:170px;resize:vertical;line-height:1.5}
+input:focus,textarea:focus,select:focus{border-color:var(--accent)}
+button{background:linear-gradient(120deg,#8170ef,#4a9ddc);color:white;border:0;padding:11px 16px;border-radius:10px;cursor:pointer;font-weight:700}
+button:hover{filter:brightness(1.15)}
+button:disabled{opacity:.4;cursor:not-allowed}
+.secondary{background:#222b45;border:1px solid var(--border)}
+.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:14px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:15px}
+.stat{background:#10182b;padding:14px;border:1px solid var(--border);border-radius:12px}
+.stat strong{display:block;font-size:22px;color:#b5aaff;margin-top:5px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
+.result{margin-top:15px;padding:15px;background:#10182b;border-radius:12px;border:1px solid var(--border)}
+.preview{display:none;margin-top:18px;max-width:100%;max-height:350px;border-radius:12px;border:1px solid var(--border)}
+.note{font-size:12px;color:var(--muted);line-height:1.5}
+.file-label{display:block;padding:25px;text-align:center;border:1px dashed #6873a5;border-radius:14px;cursor:pointer;background:#10182b}
+.file-label input{display:none}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:25px}
+@media(max-width:600px){body{padding:15px}.panel{padding:17px}.grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}nav{margin-bottom:35px}}
+</style>
+</head>
+<body>
+<main>
+<nav>
+ <div class="logo">PIXELPILOT<span>.</span></div>
+ <a href="index.html">← Back to Home</a>
+</nav>
+
+<header class="hero">
+ <div class="tag">YOUR DIGITAL TOOLBOX</div>
+ <h1>Get things done.<br><span style="color:#a99aff">Without the hassle.</span></h1>
+ <p>Simple, useful tools for everyday digital tasks. Free to use, right in your browser.</p>
+</header>
+
+<div class="tabs">
+ <button class="tab active" data-tab="text">Text Toolkit</button>
+ <button class="tab" data-tab="image">Image Resizer</button>
+ <button class="tab" data-tab="calc">Percentage Calculator</button>
+</div>
+
+<!-- TEXT TOOLKIT -->
+<section class="panel tool active" id="text">
+ <h2>Text Toolkit</h2>
+ <p class="muted">Count words, clean text and change letter case.</p>
+ <label for="textInput">Your text</label>
+ <textarea id="textInput" placeholder="Type or paste your text here..."></textarea>
+
+ <div class="stats">
+  <div class="stat">Words<strong id="words">0</strong></div>
+  <div class="stat">Characters<strong id="chars">0</strong></div>
+  <div class="stat">Sentences<strong id="sentences">0</strong></div>
+ </div>
+
+ <div class="actions">
+  <button onclick="changeCase('upper')">UPPERCASE</button>
+  <button onclick="changeCase('lower')">lowercase</button>
+  <button onclick="changeCase('title')">Title Case</button>
+  <button class="secondary" onclick="cleanText()">Clean Spaces</button>
+  <button class="secondary" onclick="copyText()">Copy Text</button>
+  <button class="secondary" onclick="clearText()">Clear</button>
+ </div>
+</section>
+
+<!-- IMAGE RESIZER -->
+<section class="panel tool" id="image">
+ <h2>Image Resizer & Compressor</h2>
+ <p class="muted">Resize an image and export it in a different format. Your image stays in your browser.</p>
+
+ <label class="file-label">
+  <strong>Choose an image</strong>
+  <p class="note">Click to select a JPG, PNG or WebP image</p>
+  <input type="file" id="imageInput" accept="image/png,image/jpeg,image/webp">
+ </label>
+
+ <img id="preview" class="preview" alt="Image preview">
+
+ <div id="imageControls" style="display:none">
+  <div class="grid">
+   <div>
+    <label for="imgWidth">Width (pixels)</label>
+    <input type="number" id="imgWidth" min="1" max="10000">
+   </div>
+   <div>
+    <label for="imgHeight">Height (pixels)</label>
+    <input type="number" id="imgHeight" min="1" max="10000">
+   </div>
+  </div>
+  <label><input type="checkbox" id="lockRatio" checked style="width:auto"> Keep original proportions</label>
+
+  <label for="format">Output format</label>
+  <select id="format">
+   <option value="image/jpeg">JPG</option>
+   <option value="image/png">PNG</option>
+   <option value="image/webp">WebP</option>
+  </select>
+
+  <label for="quality">Image quality: <span id="qualityValue">85%</span></label>
+  <input type="range" id="quality" min="10" max="100" value="85">
+
+  <div class="actions">
+   <button onclick="resizeImage()">Resize & Export</button>
+  </div>
+  <div id="imageResult" class="result" style="display:none"></div>
+ </div>
+ <p class="note">Very large images may use significant browser memory. Exporting JPG removes transparency.</p>
+</section>
+
+<!-- PERCENTAGE CALCULATOR -->
+<section class="panel tool" id="calc">
+ <h2>Percentage Calculator</h2>
+ <p class="muted">Quickly calculate percentages and percentage changes.</p>
+
+ <div class="grid">
+  <div>
+   <label for="percent">What is X% of Y?</label>
+   <input type="number" id="percent" placeholder="Percentage, e.g. 20">
+   <label for="number">Enter Y</label>
+   <input type="number" id="number" placeholder="Number, e.g. 500">
+   <button style="margin-top:12px" onclick="calculatePercent()">Calculate</button>
+   <div id="percentResult" class="result">Your answer will appear here.</div>
+  </div>
+
+  <div>
+   <label for="oldValue">Percentage change</label>
+   <input type="number" id="oldValue" placeholder="Original value">
+   <label for="newValue">New value</label>
+   <input type="number" id="newValue" placeholder="New value">
+   <button style="margin-top:12px" onclick="calculateChange()">Calculate change</button>
+   <div id="changeResult" class="result">Your answer will appear here.</div>
+  </div>
+ </div>
+</section>
+
+<footer>PIXELPILOT HUB · Useful tools, less hassle.</footer>
+</main>
+
+<script>
+// TAB NAVIGATION
+document.querySelectorAll(".tab").forEach(button=>{
+ button.addEventListener("click",()=>{
+  document.querySelectorAll(".tab").forEach(b=>b.classList.remove("active"));
+  document.querySelectorAll(".tool").forEach(t=>t.classList.remove("active"));
+  button.classList.add("active");
+  document.getElementById(button.dataset.tab).classList.add("active");
+ });
+});
+
+// TEXT TOOLKIT
+const textInput=document.getElementById("textInput");
+
+function updateStats(){
+ const value=textInput.value;
+ const words=value.trim()?value.trim().split(/\s+/).length:0;
+ const sentences=value.trim()?value.split(/[.!?]+/).filter(s=>s.trim()).length:0;
+ document.getElementById("words").textContent=words;
+ document.getElementById("chars").textContent=value.length;
+ document.getElementById("sentences").textContent=sentences;
+}
+textInput.addEventListener("input",updateStats);
+
+function changeCase(type){
+ let value=textInput.value;
+ if(type==="upper")value=value.toUpperCase();
+ if(type==="lower")value=value.toLowerCase();
+ if(type==="title")value=value.toLowerCase().replace(/\b\w/g,c=>c.toUpperCase());
+ textInput.value=value;
+ updateStats();
+}
+function cleanText(){
+ textInput.value=textInput.value.replace(/[ \t]+/g," ").replace(/\n{3,}/g,"\n\n").trim();
+ updateStats();
+}
+async function copyText(){
+ try{
+  await navigator.clipboard.writeText(textInput.value);
+  alert("Text copied!");
+ }catch(e){alert("Copy failed. Check browser permissions.");}
+}
+function clearText(){
+ textInput.value="";
+ updateStats();
+}
+
+// IMAGE TOOL
+let selectedImage=null;
+let originalWidth=0;
+let originalHeight=0;
+
+const imageInput=document.getElementById("imageInput");
+const imgWidth=document.getElementById("imgWidth");
+const imgHeight=document.getElementById("imgHeight");
+const preview=document.getElementById("preview");
+
+imageInput.addEventListener("change",()=>{
+ const file=imageInput.files[0];
+ if(!file)return;
+ if(!["image/jpeg","image/png","image/webp"].includes(file.type)){
+  alert("Please choose a JPG, PNG or WebP image.");
+  imageInput.value="";
+  return;
+ }
+ if(file.size>20*1024*1024){
+  alert("Please choose an image smaller than 20 MB.");
+  imageInput.value="";
+  return;
+ }
+
+ const reader=new FileReader();
+ reader.onload=()=>{
+  const image=new Image();
+  image.onload=()=>{
+   selectedImage=image;
+   originalWidth=image.naturalWidth;
+   originalHeight=image.naturalHeight;
+   imgWidth.value=originalWidth;
+   imgHeight.value=originalHeight;
+   preview.src=reader.result;
+   preview.style.display="block";
+   document.getElementById("imageControls").style.display="block";
+   document.getElementById("imageResult").style.display="none";
+  };
+  image.onerror=()=>alert("Could not load this image.");
+  image.src=reader.result;
+ };
+ reader.readAsDataURL(file);
+});
+
+imgWidth.addEventListener("input",()=>{
+ if(document.getElementById("lockRatio").checked&&originalWidth){
+  const w=Number(imgWidth.value);
+  if(w>0)imgHeight.value=Math.round(w*originalHeight/originalWidth);
+ }
+});
+imgHeight.addEventListener("input",()=>{
+ if(document.getElementById("lockRatio").checked&&originalHeight){
+  const h=Number(imgHeight.value);
+  if(h>0)imgWidth.value=Math.round(h*originalWidth/originalHeight);
+ }
+});
+
+document.getElementById("quality").addEventListener("input",e=>{
+ document.getElementById("qualityValue").textContent=e.target.value+"%";
+});
+
+function resizeImage(){
+ if(!selectedImage)return;
+
+ const width=Number(imgWidth.value);
+ const height=Number(imgHeight.value);
+
+ if(!Number.isInteger(width)||!Number.isInteger(height)||
+ width<1||height<1||width>10000||height>10000){
+  alert("Enter valid dimensions between 1 and 10,000 pixels.");
+  return;
+ }
+
+ const canvas=document.createElement("canvas");
+ canvas.width=width;
+ canvas.height=height;
+ const ctx=canvas.getContext("2d");
+ const format=document.getElementById("format").value;
+ const quality=Number(document.getElementById("quality").value)/100;
+
+ if(format==="image/jpeg"){
+  ctx.fillStyle="#ffffff";
+  ctx.fillRect(0,0,width,height);
+ }
+ ctx.drawImage(selectedImage,0,0,width,height);
+
+ canvas.toBlob(blob=>{
+  if(!blob){
+   alert("Image export failed.");
+   return;
+  }
+  const url=URL.createObjectURL(blob);
+  const extension=format==="image/jpeg"?"jpg":
+   format==="image/png"?"png":"webp";
+  const result=document.getElementById("imageResult");
+  result.style.display="block";
+  result.innerHTML=`
+   <strong>Image ready!</strong>
+   <p>${width} × ${height} pixels · ${(blob.size/1024).toFixed(1)} KB</p>
+   <a id="downloadImage" download="pixelpilot-image.${extension}"
+   style="color:#a99aff;font-weight:bold">Download your image ↓</a>
+  `;
+  document.getElementById("downloadImage").href=url;
+ },format,quality);
+}
+
+// PERCENTAGE CALCULATOR
+function calculatePercent(){
+ const p=document.getElementById("percent").value;
+ const n=document.getElementById("number").value;
+ if(p===""||n===""){
+  alert("Enter both numbers.");
+  return;
+ }
+ const answer=Number(p)*Number(n)/100;
+ document.getElementById("percentResult").textContent=
+  `${p}% of ${n} = ${answer.toLocaleString(undefined,{maximumFractionDigits:6})}`;
+}
+
+function calculateChange(){
+ const oldValue=document.getElementById("oldValue").value;
+ const newValue=document.getElementById("newValue").value;
+ if(oldValue===""||newValue===""){
+  alert("Enter both values.");
+  return;
+ }
+ if(Number(oldValue)===0){
+  alert("Original value cannot be zero.");
+  return;
+ }
+ const change=(Number(newValue)-Number(oldValue))/Math.abs(Number(oldValue))*100;
+ const direction=change>0?"increase":change<0?"decrease":"no change";
+ document.getElementById("changeResult").textContent=
+  `${Math.abs(change).toFixed(2)}% ${direction}`;
+}
+</script>
+</body>
+</html>

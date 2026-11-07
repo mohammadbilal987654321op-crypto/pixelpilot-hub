@@ -493,3 +493,12 @@ footer {
     padding: 10px 15px;
   }
 }
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #c70404;
+    text-decoration: none;
+}
